@@ -4,7 +4,7 @@ Blog.destroy_all
 
 10.times do |index|
     title   =  FFaker::Name.name
-    body    = FFaker::FreedomIpsum.sentence
+    body    = FFaker::FreedomIpsum.sentence[0..30]
     puts title, body
     Blog.create!({
         title: title,
