@@ -1,6 +1,15 @@
 require 'ffaker'
 
 Blog.destroy_all
+Topic.destroy_all
+Skill.destroy_all
+Portfolio.destroy_all
+
+3.times do |topic|
+  Topic.create({
+    title: FFaker::Name.name
+  })
+end
 
 10.times do |index|
     title   =  FFaker::Name.name
@@ -8,15 +17,9 @@ Blog.destroy_all
     puts title, body
     Blog.create!({
         title: title,
-        body: body
+        body: body,
+        topic_id: Topic.last.id
     })
-end
-
-10.times do |blog|
-  Blog.create!(
-      title: FFaker::Name.name,
-      body: FFaker::FreedomIpsum.sentence
-  )
 end
 
 puts "10 blog posts created"
@@ -33,11 +36,19 @@ end
   9.times do |portfolio_item|
     Portfolio.create!(
       title: "Portfolio title: #{portfolio_item}",
-      subtitle: FFaker::Name.name,
+      subtitle: 'Angular',
       body: FFaker::FreedomIpsum.sentence,
       main_image: "http://placehold.it/600x400",
       thumb_image: "http://placehold.it/350x200"
     )
   end
+
+  Portfolio.create!(
+      title: "Portfolio title: #{11}",
+      subtitle: 'ROR',
+      body: FFaker::FreedomIpsum.sentence,
+      main_image: "http://placehold.it/600x400",
+      thumb_image: "http://placehold.it/350x200"
+    )
   
   puts "9 portfolio items created"
